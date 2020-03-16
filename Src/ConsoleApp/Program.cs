@@ -1,12 +1,43 @@
 ﻿using System;
+using System.Reflection;
+using QuestionGenerator.Lib;
 
 namespace QuestionGenerator.ConsoleApp
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var game = new Lib.QuestionGenerator();
+
+            PrintAppInformation();
+
+            while (true)
+            {
+                Console.Write("INPUT QUESTION TYPE:");
+
+                var line = Console.ReadLine();
+
+                if (line == "end")
+                {
+                    Console.WriteLine("THANKS FOR PLAYING!");
+                    break;
+                }
+
+                var questionType = (QuestionType)Enum.Parse(typeof(QuestionType), line);
+                var result = game.ReturnQuestion(questionType);
+                Console.WriteLine($"{result}");
+            }
+        }
+
+        private static void PrintAppInformation()
+        {
+            var versionString = Assembly.GetEntryAssembly()
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion;
+            Console.WriteLine($"CONFESS OR DRINK - QUESTION GENERATOR v{versionString}");
+            Console.WriteLine("==========================================");
+            Console.WriteLine($"QUESTION TYPES: --> OPTIONS: 1 - NEVER  HAVE I EVER | 2 - MOST LIKELY | 3 - CONFESS OR DRINK | 4 - TASK | 5 - CHOOSE FOR ME ");
         }
     }
 }
