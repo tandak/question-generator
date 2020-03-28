@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using QuestionGenerator.Lib;
 using QuestionGenerator.Lib.Models;
 
 namespace QuestionGenerator.ConsoleApp
@@ -27,7 +26,7 @@ namespace QuestionGenerator.ConsoleApp
 
                 var questionType = (QuestionType)Enum.Parse(typeof(QuestionType), line);
                 var result = game.ReturnQuestion(questionType);
-                Console.WriteLine($"{result}");
+                Console.WriteLine(result);
             }
         }
 

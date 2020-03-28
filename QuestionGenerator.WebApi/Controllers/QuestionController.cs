@@ -22,7 +22,7 @@ namespace QuestionGenerator.WebApi.Controllers
         {
             if (!IsValidateQuestionTypeRequestId(id))
             {
-                return BadRequest("404 NOT A VALID QUESTION MATE");
+                return BadRequest("404 - NOT A VALID QUESTION MATE");
             }
 
             var requestedQuestionType = (QuestionType) id;

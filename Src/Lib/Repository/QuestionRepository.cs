@@ -7,11 +7,8 @@ namespace QuestionGenerator.Lib.Repository
     public interface IQuestionRepository
     {
         string ReturnNeverHaveIEver();
-
         string ReturnMostLikely();
-
         string ReturnConfession();
-
         string ReturnTask();
     }
 
@@ -22,6 +19,8 @@ namespace QuestionGenerator.Lib.Repository
         private const string ConfessStartPhrase = "CONFESS!! ";
         private const string NeverHaveIEverStartPhrase = "NEVER HAVE I EVER ";
 
+        private readonly Random _selector = new Random();
+
         private readonly List<string> _confessions = new List<string>
             {"TELL US THE STORY OF YOUR FIRST KISS", 
                 "TELL US THE LAST MEAL YOU ATE", "A SONG THAT REMINDS YOU OF YOUR EX" };
@@ -30,7 +29,7 @@ namespace QuestionGenerator.Lib.Repository
         {
             "MARRY SOMEONE FAMOUS",
             "CHEAT ON A PARTNER",
-            "STOLEN FROM SOMEONE IN THIS GROUP"
+            "STEAL FROM SOMEONE IN THIS GROUP",
         };
 
         private readonly List<string> _neverHaveIEver = new List<string>
@@ -39,7 +38,15 @@ namespace QuestionGenerator.Lib.Repository
             "GOT WITH SOMEONE I KNOW WAS IN A RELATIONSHIP",
             "FOUND A FRIEND’S BOYFRIEND/GIRLFRIEND ATTRACTIVE?",
             "CHEATED ON A TEST IN SCHOOL",
-            "USED A FLAVORED CONDOM/LUBE "
+            "USED A FLAVORED CONDOM/LUBE ",
+            "‘I LOVE YOU’ JUST TO GET LAID.",
+            "TO A FRIEND TO AVOID A GREATER EVIL.",
+            "STUCK GUM UNDER A DESK.",
+            "HAD A NIGHT STAND.",
+            "SWAM NAKED IN A POOL / BEACH.",
+            "FOUGHT IN THE STREET.",
+            "BEEN ROBBED.",
+            "ILLEGALLY TAKEN SOMETHING ACROSS THE BORDER. (PLEASE SHARE LOL)"
         };
 
         private readonly List<string> _randomTask = new List<string>
@@ -53,8 +60,6 @@ namespace QuestionGenerator.Lib.Repository
             "ITS TIME TO RHYME...GO GO GO",
             "(TEAM TASK) NO-ONE CAN USE NAMES UNTIL ITS MY TURN AGAIN"
         };
-
-        private readonly Random _selector = new Random();
 
         public string ReturnConfession()
         {
