@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuestionGenerator.Lib
 {
@@ -16,62 +17,98 @@ namespace QuestionGenerator.Lib
 
     public class QuestionRepository : IQuestionRepository
     {
-        private const int Start = 1;
+        private const int Start = 0;
+        private const string MostLikelyStartPhrase = "WHO HERE IS MOST LIKELY TO ";
+        private const string ConfessStartPhrase = "CONFESS!! ";
+        private const string NeverHaveIEverStartPhrase = "NEVER HAVE I EVER ";
 
         private readonly Random _selector = new Random();
 
-        private readonly IDictionary<int, string> _confessionQuestions = new Dictionary<int, string>
+        private readonly List<string> _confessions = new List<string>()
+            {"TELL US THE STORY OF YOUR FIRST KISS", "TELL US THE LAST MEAL YOU ATE", "2", "3"};
+
+        private readonly List<string> _mostLikely = new List<string>()
         {
-            [1] = "TELL US THE STORY OF YOUR FIRST KISS"
+            "MARRY SOMEONE FAMOUS", 
+            "CHEAT ON A PARTNER", 
+            "STOLEN FROM SOMEONE IN THIS GROUP"
         };
 
-        private readonly IDictionary<int, string> _mostLikelyQuestions = new Dictionary<int, string>
+        private readonly List<string> _neverHaveIEver = new List<string>
         {
-            [1] = "TO MARRY SOMEONE FAMOUS",
-            [2] = "CHEAT ON A PARTNER",
-            [3] = "STEAL FROM SOMEONE IN THIS GROUP"
+            "EATEN CHOCOLATE", "CHEATED ON A PARTNER",
+            "GOT WITH SOMEONE I KNOW WAS IN A RELATIONSHIP",
+            "FOUND A FRIEND’S BOYFRIEND/GIRLFRIEND ATTRACTIVE?",
+            "CHEATED ON A TEST IN SCHOOL",
+            "USED A FLAVORED CONDOM/LUBE "
         };
 
-        private readonly IDictionary<int, string> _neverHaveIEverQuestions = new Dictionary<int, string>
+        private readonly List<string> _randomTask = new List<string>
         {
-            [1] = "EATEN CHOCOLATE",
-            [2] = "CHEATED ON A PARTNER",
-            [3] = "GOT WITH SOMEONE I KNOW WAS IN A RELATIONSHIP",
-            [4] = "FOUND A FRIEND’S BOYFRIEND/GIRLFRIEND ATTRACTIVE?",
-            [5] = "CHEATED ON A TEST IN SCHOOL",
-            [6] = "USED A FLAVORED CONDOM/LUBE "
-        };
-
-        private readonly  IDictionary<int, string> _randomTaskQuestions = new Dictionary<int, string>
-        {
-            [1] = "SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
-            [2] = "GUYS ON THE TABLE…DOWN YOUR DRINKS!",
-            [3] = "LUCKY YOU! POINT TO THE PERSON YOU WANT TO DOWN THEIR DRINK",
-            [4] = "SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
-            [5] = "POINT TO THE PERSON IN THE GROUP WHO YOU WOULD LEAST TRUST AROUND YOUR PARTNER (NO EXPLANATION, JUST POINT)",
-            [6] = "DO SQUATS UNTIL ITS YOUR TURN AGAIN",
-            [7] = "(TEAM TASK) NO-ONE CAN USE NAMES UNTIL ITS MY TURN AGAIN"
+            "SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
+            "GUYS ON THE TABLE…DOWN YOUR DRINKS!",
+            "LUCKY YOU! POINT TO THE PERSON YOU WANT TO DOWN THEIR DRINK",
+            "SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
+            "POINT TO THE PERSON IN THE GROUP WHO YOU WOULD LEAST TRUST AROUND YOUR PARTNER (NO EXPLANATION, JUST POINT)",
+            "DO SQUATS UNTIL ITS YOUR TURN AGAIN",
+            "(TEAM TASK) NO-ONE CAN USE NAMES UNTIL ITS MY TURN AGAIN"
         };
 
 
         public string ReturnConfession()
         {
-            return _confessionQuestions[_selector.Next(Start, _confessionQuestions.Count)];
+            if (!_confessions.Any())
+            {
+                return "YOU'VE ANSWERED ALL CONFESSION QUESTIONS - TRY ANOTHER CATEGORY";
+            }
+            var index = _selector.Next(Start, _confessions.Count());
+
+            var confession = _confessions.ElementAt(index);
+            _confessions.RemoveAt(index);
+            
+            return ConfessStartPhrase + confession;
         }
 
         public string ReturnTask()
         {
-            return _randomTaskQuestions[_selector.Next(Start, _randomTaskQuestions.Count)];
+            if (!_randomTask.Any())
+            {
+                return "YOU'VE ANSWERED ALL 'RANDOM TASK' QUESTIONS - TRY ANOTHER CATEGORY";
+            }
+            var index = _selector.Next(Start, _randomTask.Count());
+
+            var task = _randomTask.ElementAt(index);
+            _randomTask.RemoveAt(index);
+
+            return task;
         }
 
         public string ReturnMostLikely()
         {
-            return _mostLikelyQuestions[_selector.Next(Start, _mostLikelyQuestions.Count)];
+            if (!_mostLikely.Any())
+            {
+                return "YOU'VE ANSWERED ALL 'MOST LIKELY' QUESTIONS - TRY ANOTHER CATEGORY";
+            }
+            var index = _selector.Next(Start, _mostLikely.Count());
+
+            var mostLikely = _mostLikely.ElementAt(index);
+            _mostLikely.RemoveAt(index);
+
+            return MostLikelyStartPhrase + mostLikely;
         }
 
         public string ReturnNeverHaveIEver()
         {
-            return _neverHaveIEverQuestions[_selector.Next(Start, _neverHaveIEverQuestions.Count)];
+            if (!_neverHaveIEver.Any())
+            {
+                return "YOU'VE ANSWERED ALL 'NEVER HAVE I EVER' QUESTIONS - TRY ANOTHER CATEGORY";
+            }
+            var index = _selector.Next(Start, _neverHaveIEver.Count());
+
+            var neverHaveIEver = _neverHaveIEver.ElementAt(index);
+            _neverHaveIEver.RemoveAt(index);
+
+            return NeverHaveIEverStartPhrase + neverHaveIEver;
         }
     }
 }

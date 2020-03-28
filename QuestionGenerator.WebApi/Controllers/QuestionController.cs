@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using QuestionGenerator.Lib;
-using QuestionGenerator.Lib.Model;
+using QuestionGenerator.Lib.Models;
 
 namespace QuestionGenerator.WebApi.Controllers
 {
@@ -22,7 +21,7 @@ namespace QuestionGenerator.WebApi.Controllers
         {
             if (!IsValidateQuestionTypeRequestId(id))
             {
-                return BadRequest(ModelState);
+                return BadRequest("404 NOT A VALID QUESTION MATE");
             }
 
             var requestedQuestionType = (QuestionType) id;
@@ -38,7 +37,7 @@ namespace QuestionGenerator.WebApi.Controllers
             return new Question
             {
                 QuestionType = questionType.ToString(),
-                question = result
+                Title = result
             };
         }
 

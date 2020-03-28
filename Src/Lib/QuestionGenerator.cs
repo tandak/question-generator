@@ -13,7 +13,6 @@ namespace QuestionGenerator.Lib
 
         public string ReturnQuestion(QuestionType questionType)
         {
-            string question;
             if (questionType == QuestionType.Random)
             {
                 questionType = GetRandomQuestionType();
@@ -22,26 +21,22 @@ namespace QuestionGenerator.Lib
             switch (questionType)
             {
                 case QuestionType.NeverHaveIEver:
-                    question = _repository.ReturnNeverHaveIEver();
-                    return $"NEVER HAVE I EVER {question}";
+                    return _repository.ReturnNeverHaveIEver();
                 case QuestionType.MostLikely:
-                    question = _repository.ReturnMostLikely();
-                    return $"WHO HERE IS MOST LIKELY TO {question}";
+                    return _repository.ReturnMostLikely();
                 case QuestionType.Confess:
-                    question = _repository.ReturnConfession();
-                    return $"CONFESS {question}";
+                    return _repository.ReturnConfession();
                 case QuestionType.Task:
-                    question = _repository.ReturnTask();
-                    return $"TASK: {question}";
+                    return _repository.ReturnTask();
                 default:
-                    return "ERROR - TRY AGAIN";
+                   throw new Exception();
             }
         }
 
-        private QuestionType GetRandomQuestionType()
+        private static QuestionType GetRandomQuestionType()
         { 
             var selector = new Random();
-            return (QuestionType)selector.Next(1, 5);
+            return (QuestionType)selector.Next(1, 4);
         }
     }
 }
