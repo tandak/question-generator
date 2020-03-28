@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuestionGenerator.Lib;
 using QuestionGenerator.Lib.Models;
+using static QuestionGenerator.Lib.QuestionMapper;
 
 namespace QuestionGenerator.WebApi.Controllers
 {
@@ -25,20 +26,11 @@ namespace QuestionGenerator.WebApi.Controllers
             }
 
             var requestedQuestionType = (QuestionType) id;
-            var result = _questionComposer.ReturnQuestion(requestedQuestionType);
+            var question = _questionComposer.ReturnQuestion(requestedQuestionType);
 
-            var question = MapResult(result, requestedQuestionType);
+            var result = Map(question, requestedQuestionType);
 
-            return Ok(question);
-        }
-
-        private static Question MapResult(string result, QuestionType questionType)
-        {
-            return new Question
-            {
-                QuestionType = questionType.ToString(),
-                Title = result
-            };
+            return Ok(result);
         }
 
         private static bool IsValidateQuestionTypeRequestId(int input)

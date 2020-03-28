@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using QuestionGenerator.Lib;
+using QuestionGenerator.Lib.Models;
 
 namespace QuestionGenerator.ConsoleApp
 {

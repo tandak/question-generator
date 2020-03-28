@@ -1,4 +1,4 @@
-﻿namespace QuestionGenerator.Lib
+﻿namespace QuestionGenerator.Lib.Models
 {
     public enum QuestionType
     {

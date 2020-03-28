@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using QuestionGenerator.Lib.Models;
+using Xunit;
 
 namespace QuestionGenerator.Lib.UnitTests
 {
