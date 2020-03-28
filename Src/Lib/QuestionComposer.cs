@@ -1,22 +1,20 @@
 ﻿using System;
+using QuestionGenerator.Lib.Repository;
 
 namespace QuestionGenerator.Lib
 {
-    public interface IQuestionGenerator
+    public interface IQuestionComposer
     {
         string ReturnQuestion(QuestionType questionType);
     }
 
-    public class QuestionGenerator : IQuestionGenerator
+    public class QuestionComposer : IQuestionComposer
     {
         private readonly IQuestionRepository _repository = new QuestionRepository();
 
         public string ReturnQuestion(QuestionType questionType)
         {
-            if (questionType == QuestionType.Random)
-            {
-                questionType = GetRandomQuestionType();
-            }
+            if (questionType == QuestionType.Random) questionType = GetRandomQuestionType();
 
             switch (questionType)
             {
@@ -29,14 +27,14 @@ namespace QuestionGenerator.Lib
                 case QuestionType.Task:
                     return _repository.ReturnTask();
                 default:
-                   throw new Exception();
+                    return "";
             }
         }
 
         private static QuestionType GetRandomQuestionType()
-        { 
+        {
             var selector = new Random();
-            return (QuestionType)selector.Next(1, 4);
+            return (QuestionType) selector.Next(1, 4);
         }
     }
 }

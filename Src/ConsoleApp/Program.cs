@@ -8,7 +8,7 @@ namespace QuestionGenerator.ConsoleApp
     {
         private static void Main(string[] args)
         {
-            var game = new Lib.QuestionGenerator();
+            var game = new Lib.QuestionComposer();
 
             PrintAppInformation();
 

@@ -2,7 +2,7 @@
 
 namespace QuestionGenerator.Lib.UnitTests
 {
-    public class QuestionGeneratorShould
+    public class QuestionComposerShould
     {
         [Theory]
         [InlineData(QuestionType.NeverHaveIEver, "NEVER HAVE I EVER")]
@@ -10,7 +10,7 @@ namespace QuestionGenerator.Lib.UnitTests
         [InlineData(QuestionType.Confess, "CONFESS")]
         public void Return_Correct_Question_Type(QuestionType questionType, string expectedSubstring)
         {
-            var game = new QuestionGenerator();
+            var game = new QuestionComposer();
             var result = game.ReturnQuestion(questionType);
 
             Assert.Contains(expectedSubstring, result);

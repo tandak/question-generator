@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using QuestionGenerator.Lib;
+using QuestionGenerator.Lib.Repository;
 
 namespace QuestionGenerator.WebApi
 {
@@ -21,8 +22,8 @@ namespace QuestionGenerator.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.TryAddSingleton<IQuestionGenerator, Lib.QuestionGenerator>();
-            services.TryAddSingleton<IQuestionRepository, Lib.QuestionRepository>();
+            services.TryAddSingleton<IQuestionComposer, Lib.QuestionComposer>();
+            services.TryAddSingleton<IQuestionRepository, QuestionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

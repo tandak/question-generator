@@ -8,11 +8,11 @@ namespace QuestionGenerator.WebApi.Controllers
     [Route("api/question")]
     public class QuestionController : Controller
     {
-        private readonly IQuestionGenerator _questionGenerator;
+        private readonly IQuestionComposer _questionComposer;
 
-        public QuestionController(IQuestionGenerator questionGenerator)
+        public QuestionController(IQuestionComposer questionComposer)
         {
-            _questionGenerator = questionGenerator;
+            _questionComposer = questionComposer;
         }
 
         [HttpGet]
@@ -25,7 +25,7 @@ namespace QuestionGenerator.WebApi.Controllers
             }
 
             var requestedQuestionType = (QuestionType) id;
-            var result = _questionGenerator.ReturnQuestion(requestedQuestionType);
+            var result = _questionComposer.ReturnQuestion(requestedQuestionType);
 
             var question = MapResult(result, requestedQuestionType);
 
