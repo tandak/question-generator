@@ -22,7 +22,7 @@ namespace QuestionGenerator.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.TryAddSingleton<IQuestionComposer, Lib.QuestionComposer>();
+            services.TryAddSingleton<IQuestionComposer, QuestionComposer>();
             services.TryAddSingleton<IQuestionRepository, QuestionRepository>();
         }
 

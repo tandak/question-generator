@@ -1,20 +1,71 @@
-﻿using QuestionGenerator.Lib.Models;
+﻿using Moq;
+using QuestionGenerator.Lib.Models;
+using QuestionGenerator.Lib.Repository;
 using Xunit;
 
 namespace QuestionGenerator.Lib.UnitTests
 {
     public class QuestionComposerShould
     {
-        [Theory]
-        [InlineData(QuestionType.NeverHaveIEver, "NEVER HAVE I EVER")]
-        [InlineData(QuestionType.MostLikely, "WHO HERE IS MOST LIKELY")]
-        [InlineData(QuestionType.Confess, "CONFESS")]
-        public void Return_Correct_Question_Type(QuestionType questionType, string expectedSubstring)
-        {
-            var game = new QuestionComposer();
-            var result = game.ReturnQuestion(questionType);
+        private readonly Mock<IQuestionRepository> _questionRepositoryMock;
+        private readonly QuestionComposer _questionComposer;
 
-            Assert.Contains(expectedSubstring, result);
+        public QuestionComposerShould()
+        {
+            _questionRepositoryMock = new Mock<IQuestionRepository>();
+            _questionComposer = new QuestionComposer(_questionRepositoryMock.Object);
+        }
+
+        [Fact]
+        public void Return_Expected_Confession_Question()
+        {
+            var expectedQuestion = "CONFESSION...ABC";
+
+            _questionRepositoryMock.Setup(x => x.GetConfessionQuestion())
+                .Returns(expectedQuestion);
+
+            var result = _questionComposer.ReturnQuestion(QuestionType.Confess);
+
+            Assert.Contains(expectedQuestion, result);
+        }
+
+        [Fact]
+        public void Return_Expected_MostLikely_Question()
+        {
+            var expectedQuestion = "MOST LIKELY...ABC";
+
+            _questionRepositoryMock.Setup(x => x.GetMostLikelyQuestion())
+                .Returns(expectedQuestion);
+
+            var result = _questionComposer.ReturnQuestion(QuestionType.MostLikely);
+
+            Assert.Contains(expectedQuestion, result);
+        }
+
+        [Fact]
+        public void Return_Expected_NeverHaveIEver_Question()
+        {
+            var expectedQuestion = "NEVER HAVE I EVER...ABC";
+
+            _questionRepositoryMock.Setup(x => x.GetNeverHaveIEverQuestion())
+                .Returns(expectedQuestion);
+
+            var result = _questionComposer.ReturnQuestion(QuestionType.NeverHaveIEver);
+
+            Assert.Contains(expectedQuestion, result);
+        }
+
+        [Fact]
+        public void Return_Expected_Task_Question()
+        {
+            var expectedQuestion = "TASK...ABC";
+
+            _questionRepositoryMock.Setup(x => x.GetTask())
+                .Returns(expectedQuestion);
+
+            var result = _questionComposer.ReturnQuestion(QuestionType.Task);
+
+            Assert.Contains(expectedQuestion, result);
         }
     }
 }

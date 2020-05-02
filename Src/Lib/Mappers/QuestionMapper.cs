@@ -1,6 +1,6 @@
 ﻿using QuestionGenerator.Lib.Models;
 
-namespace QuestionGenerator.Lib
+namespace QuestionGenerator.Lib.Mappers
 {
     public class QuestionMapper
     {

@@ -6,10 +6,10 @@ namespace QuestionGenerator.Lib.Repository
 {
     public interface IQuestionRepository
     {
-        string ReturnNeverHaveIEver();
-        string ReturnMostLikely();
-        string ReturnConfession();
-        string ReturnTask();
+        string GetNeverHaveIEverQuestion();
+        string GetMostLikelyQuestion();
+        string GetConfessionQuestion();
+        string GetTask();
     }
 
     public class QuestionRepository : IQuestionRepository
@@ -19,17 +19,17 @@ namespace QuestionGenerator.Lib.Repository
         private const string ConfessStartPhrase = "CONFESS!! ";
         private const string NeverHaveIEverStartPhrase = "NEVER HAVE I EVER ";
 
-        private readonly Random _selector = new Random();
-
         private readonly List<string> _confessions = new List<string>
-            {"TELL US THE STORY OF YOUR FIRST KISS", 
-                "TELL US THE LAST MEAL YOU ATE", "A SONG THAT REMINDS YOU OF YOUR EX" };
+        {
+            "TELL US THE STORY OF YOUR FIRST KISS",
+            "TELL US THE LAST MEAL YOU ATE", "A SONG THAT REMINDS YOU OF YOUR EX"
+        };
 
         private readonly List<string> _mostLikely = new List<string>
         {
             "MARRY SOMEONE FAMOUS",
             "CHEAT ON A PARTNER",
-            "STEAL FROM SOMEONE IN THIS GROUP",
+            "STEAL FROM SOMEONE IN THIS GROUP"
         };
 
         private readonly List<string> _neverHaveIEver = new List<string>
@@ -51,17 +51,19 @@ namespace QuestionGenerator.Lib.Repository
 
         private readonly List<string> _randomTask = new List<string>
         {
-            "SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
-            "GUYS IN THE GROUP DOWN YOUR DRINKS!",
-            "LUCKY YOU! POINT TO THE PERSON YOU WANT TO DOWN THEIR DRINK",
-            "SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
-            "POINT TO THE PERSON IN THE GROUP WHO YOU WOULD LEAST TRUST AROUND YOUR PARTNER (NO EXPLANATION, JUST POINT)",
-            "DO SQUATS UNTIL ITS YOUR TURN AGAIN",
-            "ITS TIME TO RHYME...GO GO GO",
+            "TASK - SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
+            "TASK - GUYS IN THE GROUP DOWN YOUR DRINKS!",
+            "TASK -LUCKY YOU! POINT TO THE PERSON YOU WANT TO DOWN THEIR DRINK",
+            "TASK - SHARE A JOKE WITH THE GROUP - IF NO - ONE LAUGHS ? DRINK PLEASE",
+            "TASK - POINT TO THE PERSON IN THE GROUP WHO YOU WOULD LEAST TRUST AROUND YOUR PARTNER (NO EXPLANATION, JUST POINT)",
+            "TASK - DO SQUATS UNTIL ITS YOUR TURN AGAIN",
+            "TASK - ITS TIME TO RHYME...GO GO GO",
             "(TEAM TASK) NO-ONE CAN USE NAMES UNTIL ITS MY TURN AGAIN"
         };
 
-        public string ReturnConfession()
+        private readonly Random _selector = new Random();
+
+        public string GetConfessionQuestion()
         {
             if (!_confessions.Any()) return "YOU'VE ANSWERED ALL CONFESSION QUESTIONS - TRY ANOTHER CATEGORY";
             var index = _selector.Next(Start, _confessions.Count());
@@ -72,7 +74,7 @@ namespace QuestionGenerator.Lib.Repository
             return ConfessStartPhrase + confession;
         }
 
-        public string ReturnTask()
+        public string GetTask()
         {
             if (!_randomTask.Any()) return "YOU'VE ANSWERED ALL 'RANDOM TASK' QUESTIONS - TRY ANOTHER CATEGORY";
             var index = _selector.Next(Start, _randomTask.Count());
@@ -83,7 +85,7 @@ namespace QuestionGenerator.Lib.Repository
             return task;
         }
 
-        public string ReturnMostLikely()
+        public string GetMostLikelyQuestion()
         {
             if (!_mostLikely.Any()) return "YOU'VE ANSWERED ALL 'MOST LIKELY' QUESTIONS - TRY ANOTHER CATEGORY";
             var index = _selector.Next(Start, _mostLikely.Count());
@@ -94,7 +96,7 @@ namespace QuestionGenerator.Lib.Repository
             return MostLikelyStartPhrase + mostLikely;
         }
 
-        public string ReturnNeverHaveIEver()
+        public string GetNeverHaveIEverQuestion()
         {
             if (!_neverHaveIEver.Any())
                 return "YOU'VE ANSWERED ALL 'NEVER HAVE I EVER' QUESTIONS - TRY ANOTHER CATEGORY";

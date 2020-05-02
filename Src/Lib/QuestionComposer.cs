@@ -11,7 +11,12 @@ namespace QuestionGenerator.Lib
 
     public class QuestionComposer : IQuestionComposer
     {
-        private readonly IQuestionRepository _repository = new QuestionRepository();
+        private readonly IQuestionRepository _repository;
+
+        public QuestionComposer(IQuestionRepository repository)
+        {
+            _repository = repository;
+        }
 
         public string ReturnQuestion(QuestionType questionType)
         {
@@ -20,13 +25,13 @@ namespace QuestionGenerator.Lib
             switch (questionType)
             {
                 case QuestionType.NeverHaveIEver:
-                    return _repository.ReturnNeverHaveIEver();
+                    return _repository.GetNeverHaveIEverQuestion();
                 case QuestionType.MostLikely:
-                    return _repository.ReturnMostLikely();
+                    return _repository.GetMostLikelyQuestion();
                 case QuestionType.Confess:
-                    return _repository.ReturnConfession();
+                    return _repository.GetConfessionQuestion();
                 case QuestionType.Task:
-                    return _repository.ReturnTask();
+                    return _repository.GetTask();
                 default:
                     return "";
             }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using QuestionGenerator.Lib;
 using QuestionGenerator.Lib.Models;
+using QuestionGenerator.Lib.Repository;
 
 namespace QuestionGenerator.ConsoleApp
 {
@@ -8,7 +10,8 @@ namespace QuestionGenerator.ConsoleApp
     {
         private static void Main(string[] args)
         {
-            var game = new Lib.QuestionComposer();
+           var repository = new QuestionRepository();
+           var questionComposer = new QuestionComposer(repository);
 
             PrintAppInformation();
 
@@ -25,7 +28,7 @@ namespace QuestionGenerator.ConsoleApp
                 }
 
                 var questionType = (QuestionType)Enum.Parse(typeof(QuestionType), line);
-                var result = game.ReturnQuestion(questionType);
+                var result = questionComposer.ReturnQuestion(questionType);
                 Console.WriteLine(result);
             }
         }

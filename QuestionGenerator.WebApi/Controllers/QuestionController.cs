@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuestionGenerator.Lib;
 using QuestionGenerator.Lib.Models;
-using static QuestionGenerator.Lib.QuestionMapper;
+using static QuestionGenerator.Lib.Mappers.QuestionMapper;
 
 namespace QuestionGenerator.WebApi.Controllers
 {
