@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    
+    <div>
+        <label for="question">Choose a question type:</label>
+        
+        <form>
+            <select id="question">
+                <option value="None">--- Select ---</option>
+                <option value="1">Never Have I Ever</option>
+                <option value="2">Most Likely</option>
+                <option value="3">Confess</option>
+                <option value="4">Task</option>
+                <option value="5">Random</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+    
+    <div id="response">
+
+    </div>
+    
+
+    <p>Created By: <a href="https://instagram.com/hellotanda">hellotanda</a>.</p>
+</div>

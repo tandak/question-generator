@@ -3,11 +3,11 @@ using QuestionGenerator.Lib;
 using QuestionGenerator.Lib.Models;
 using static QuestionGenerator.Lib.Mappers.QuestionMapper;
 
-namespace QuestionGenerator.WebApi.Controllers
+namespace QuestionGeneratorWebApp.Controllers
 {
+    [Route("hellotanda/questiongenerator/v1/question/")]
     [ApiController]
-    [Route("api/question")]
-    public class QuestionController : Controller
+    public class QuestionController : ControllerBase
     {
         private readonly IQuestionComposer _questionComposer;
 
@@ -25,7 +25,7 @@ namespace QuestionGenerator.WebApi.Controllers
                 return BadRequest("404 - NOT A VALID QUESTION MATE");
             }
 
-            var requestedQuestionType = (QuestionType) id;
+            var requestedQuestionType = (QuestionType)id;
             var question = _questionComposer.ReturnQuestion(requestedQuestionType);
 
             var result = Map(question, requestedQuestionType);
