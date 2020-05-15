@@ -35,7 +35,7 @@ namespace QuestionGeneratorWebApp.Controllers
 
         private static bool IsValidateQuestionTypeRequestId(int input)
         {
-            return input > 0 && input < 5;
+            return input > 0 && input < 6;
         }
     }
 }

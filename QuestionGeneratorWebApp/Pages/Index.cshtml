@@ -2,36 +2,45 @@
 @using QuestionGeneratorWebApp.Controllers
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "QG -";
 }
-
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-
-        <div>
-            <label for="question">Choose a question type:</label>
-            @using (Html.BeginForm("QuestionType", "Question", FormMethod.Post))
-            {
-                <form>
-                    <select id="question">
-                        <option value="None">--- Select ---</option>
-                        <option value="1">Never Have I Ever</option>
-                        <option value="2">Most Likely</option>
-                        <option value="3">Confess</option>
-                        <option value="4">Task</option>
-                        <option value="5">Random</option>
-                    </select>
-                </form>
-                <button type="submit" class="btn btn-default">Submit</button>
-
-            }
-
-        </div>
-
-        <div id="response">
-
-        </div>
-
-
-        <p>Created By: <a href="https://instagram.com/hellotanda">hellotanda</a>.</p>
+<div class="text-center">
+    <h1>HEY YOU!</h1>
+    <div>
+        <input type="button" title="GET" value="CLICK ME" onclick="location.href = '@Url.Action("Get", "Question", new { id = 5 })'" />
     </div>
+    <br/>
+    <div id="response">
+
+    </div>
+    <div>
+        <h4>OR SELECT A CATEGORY BELOW:</h4>
+        <label for="question">Choose a question type:</label>
+        @using (Html.BeginForm("QuestionType", "Question", FormMethod.Post))
+        {
+            <form>
+                <select id="question">
+                    <option value="None">--- Select ---</option>
+                    <option value="1">Never Have I Ever</option>
+                    <option value="2">Most Likely</option>
+                    <option value="3">Confess</option>
+                    <option value="4">Task</option>
+                    <option value="5">Random</option>
+                </select>
+            </form>
+        }
+    </div>
+    <p>Created By Tanda :) </p>
+</div>
+<div id="rules">
+    <p>
+        <b><u>Question Categories:</u></b> <br />
+        <ul>
+            <li><b>Never Have I Ever</b>: STANDARD, 'never have I ever' group answer questions. </li>
+            <li><b>Most Likely</b>: The chosen person but select the person they believe the sentence refers too without an explanation.</li>
+            <li><b>Confess</b>: The chosen person MUST answer the confession or take a drink.</li>
+            <li><b>Task</b>: The chosen person MUST answer the confession without an explanation.</li>
+            <li><b>Random</b>: Let the Question Generator choose one of the above for you.</li>
+        </ul>
+    </p>
+</div>
